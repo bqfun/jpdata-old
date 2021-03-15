@@ -1,0 +1,11 @@
+name: 'National Holidays'
+description: '日本の祝日'
+inputs:
+  destination:
+    description: 'Table into which data is to be loaded'
+    required: true
+runs:
+  using: 'docker'
+  image: 'ghcr.io/bqfun/national_holidays:latest'
+  env:
+    DESTINATION: ${{ inputs.destination }}
