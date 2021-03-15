@@ -35,4 +35,4 @@ jobs:
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
       - run: gsutil -m rsync -r outputs gs://bqfun-jpdata/national_holidays
-      - run: bq load --source_format=CSV --skip_leading_rows=1 national_holidays.national_holidays national_holidays.csv national_holidays_schema.json
+      - run: bq load --source_format=CSV --skip_leading_rows=1 national_holidays.national_holidays outputs/national_holidays.csv outputs/national_holidays_schema.json
