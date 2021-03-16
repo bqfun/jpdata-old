@@ -1,0 +1,74 @@
+[
+  {
+    "description": "業者コード（法人部分）",
+    "name": "applicant_code__corporation",
+    "type": "DATE",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "業者コード（事業所部分）",
+    "name": "applicant_code__office",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "認定・登録番号",
+    "name": "registration_number",
+    "type": "",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "業態",
+    "name": "type_of_business",
+    "type": "",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "認定区分・登録",
+    "name": "type_of_registration",
+    "type": "",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "名称",
+    "name": "name",
+    "type": "",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "所在地",
+    "name": "address",
+    "type": "",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "認定・登録（更新）年月日",
+    "name": "date_of_registration",
+    "type": "",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "有効年月日",
+    "name": "expiry_date",
+    "type": "",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "廃止年月日",
+    "name": "date_of_abolishment",
+    "type": "",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "有効期限満了に伴う更新申請の提出について",
+    "name": "application_for_re_registration_submitted",
+    "type": "BOOLEAN",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "国名",
+    "name": "country",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]
