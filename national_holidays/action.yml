@@ -2,7 +2,7 @@ name: 'National Holidays'
 description: '日本の祝日'
 inputs:
   destination:
-    description: 'Table into which data is to be loaded'
+    description: 'データ出力先ディレクトリ'
     required: true
 runs:
   using: 'docker'
