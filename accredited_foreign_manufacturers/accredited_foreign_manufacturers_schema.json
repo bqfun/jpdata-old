@@ -14,49 +14,49 @@
   {
     "description": "認定・登録番号",
     "name": "registration_number",
-    "type": "",
+    "type": "STRING",
     "mode": "REQUIRED"
   },
   {
     "description": "業態",
     "name": "type_of_business",
-    "type": "",
+    "type": "STRING",
     "mode": "REQUIRED"
   },
   {
     "description": "認定区分・登録",
     "name": "type_of_registration",
-    "type": "",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
     "description": "名称",
     "name": "name",
-    "type": "",
+    "type": "STRING",
     "mode": "REQUIRED"
   },
   {
     "description": "所在地",
     "name": "address",
-    "type": "",
+    "type": "STRING",
     "mode": "REQUIRED"
   },
   {
     "description": "認定・登録（更新）年月日",
     "name": "date_of_registration",
-    "type": "",
+    "type": "DATE",
     "mode": "REQUIRED"
   },
   {
     "description": "有効年月日",
     "name": "expiry_date",
-    "type": "",
+    "type": "DATE",
     "mode": "REQUIRED"
   },
   {
     "description": "廃止年月日",
     "name": "date_of_abolishment",
-    "type": "",
+    "type": "DATE",
     "mode": "NULLABLE"
   },
   {
