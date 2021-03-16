@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'accredited_foreign_manufacturers/**'
+      - '.github/workflows/accredited_foreign_manufacturers.yml'
+  schedule:
+      - cron: '0 0 * * *'
+
+defaults:
+  run:
+    working-directory: accredited_foreign_manufacturers
+
+jobs:
+  push_and_load:
+    runs-on: ubuntu-latest
+    if: github.repository == 'bqfun/jpdata'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./accredited_foreign_manufacturers
+          push: true
+          tags: ghcr.io/bqfun/accredited_foreign_manufacturers
+      - uses: ./accredited_foreign_manufacturers
+        with:
+          destination: /home/runner/work/jpdata/jpdata/accredited_foreign_manufacturers/outputs
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - run: gsutil -m rsync -r outputs gs://bqfun-jpdata/accredited_foreign_manufacturers
+      - run: bq load --source_format=CSV --skip_leading_rows=1 accredited_foreign_manufacturers.accredited_foreign_manufacturers outputs/accredited_foreign_manufacturers.csv outputs/accredited_foreign_manufacturers_schema.json
