@@ -2,7 +2,7 @@
   {
     "description": "業者コード（法人部分）",
     "name": "applicant_code__corporation",
-    "type": "DATE",
+    "type": "STRING",
     "mode": "REQUIRED"
   },
   {
