@@ -1,0 +1,32 @@
+[
+  {
+    "description": "団体コード",
+    "name": "code",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "都道府県名（漢字）",
+    "name": "prefecture",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "市区町村名（漢字）",
+    "name": "city",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "都道府県名（ｶﾅ）",
+    "name": "prefecture__kana",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "市区町村名（ｶﾅ）",
+    "name": "city__kana",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "description": "コード",
+    "name": "code",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "一部事務組合等の名称",
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "ふりがな",
+    "name": "name__kana",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "設立年月日",
+    "name": "establishment_date",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "郵便番号",
+    "name": "zipcode",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "所在地",
+    "name": "address",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "電話番号",
+    "name": "telephone_number",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]
