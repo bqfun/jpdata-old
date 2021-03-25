@@ -1,0 +1,11 @@
+name: 'Local Governments'
+description: '全国地方公共団体コード'
+inputs:
+  destination:
+    description: 'データ出力先ディレクトリ'
+    required: true
+runs:
+  using: 'docker'
+  image: 'ghcr.io/bqfun/local_governments:latest'
+  env:
+    DESTINATION: ${{ inputs.destination }}
