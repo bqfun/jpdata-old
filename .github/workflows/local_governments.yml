@@ -34,7 +34,17 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - run: gsutil -m rsync -r outputs gs://bqfun-jpdata/local_governments
       - run: bq load --source_format=CSV --skip_leading_rows=1 local_governments.designated_cities outputs/designated_cities.csv outputs/designated_cities_schema.json
       - run: bq load --source_format=CSV --skip_leading_rows=1 local_governments.local_governments outputs/local_governments.csv outputs/local_governments_schema.json
       - run: bq load --source_format=CSV --allow_quoted_newlines --skip_leading_rows=1 local_governments.unions outputs/unions.csv outputs/unions_schema.json
+      - name: Instal IBM Cloud CLI
+        run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
+      - run: ibmcloud login --apikey "$IBM_CLOUD_API_KEY" -r ""
+        env:
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key local_governments/designated_cities.csv --body outputs/designated_cities.csv
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key local_governments/designated_cities_schema.json --body outputs/designated_cities_schema.json
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key local_governments/local_governments.csv --body outputs/local_governments.csv
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key local_governments/local_governments_schema.json --body outputs/local_governments_schema.json
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key local_governments/unions.csv --body outputs/unions.csv
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key local_governments/unions_schema.json --body outputs/unions_schema.json
