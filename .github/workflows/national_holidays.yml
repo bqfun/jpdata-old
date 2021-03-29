@@ -34,5 +34,11 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - run: gsutil -m rsync -r outputs gs://bqfun-jpdata/national_holidays
       - run: bq load --source_format=CSV --skip_leading_rows=1 national_holidays.national_holidays outputs/national_holidays.csv outputs/national_holidays_schema.json
+      - name: Instal IBM Cloud CLI
+        run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
+      - run: ibmcloud login --apikey "$IBM_CLOUD_API_KEY" -r ""
+        env:
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key national_holidays/national_holidays.csv --body outputs/national_holidays.csv
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key national_holidays/national_holidays_schema.json --body outputs/national_holidays_schema.json
