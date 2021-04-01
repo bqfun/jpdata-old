@@ -1,0 +1,44 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'corporate_numbers/**'
+      - '.github/workflows/corporate_numbers.yml'
+  schedule:
+      - cron: '0 0 * * *'
+
+defaults:
+  run:
+    working-directory: corporate_numbers
+
+jobs:
+  push_and_load:
+    runs-on: ubuntu-latest
+    if: github.repository == 'bqfun/jpdata'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./corporate_numbers
+          push: true
+          tags: ghcr.io/bqfun/corporate_numbers
+      - uses: ./corporate_numbers
+        with:
+          destination: /home/runner/work/jpdata/jpdata/corporate_numbers/outputs
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - run: bq load --source_format=CSV --skip_leading_rows=1 corporate_numbers.corporate_numbers outputs/corporate_numbers.csv outputs/corporate_numbers_schema.json
+      - name: Instal IBM Cloud CLI
+        run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
+      - run: ibmcloud login --apikey "$IBM_CLOUD_API_KEY" -r ""
+        env:
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key corporate_numbers/corporate_numbers.csv --body outputs/corporate_numbers.csv
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key corporate_numbers/corporate_numbers_schema.json --body outputs/corporate_numbers_schema.json
