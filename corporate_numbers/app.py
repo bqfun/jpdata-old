@@ -220,15 +220,6 @@ def clean(source: str, destination: str):
         )
 
 
-def copy_schema_file(destination: str):
-    shutil.copyfile(
-        os.path.join(
-            os.path.dirname(__file__), "corporate_numbers_schema.json"
-        ),
-        os.path.join(destination, "corporate_numbers_schema.json"),
-    )
-
-
 def main():
     destination = os.environ["DESTINATION"]
     os.makedirs(destination, exist_ok=True)
@@ -236,7 +227,6 @@ def main():
     unzip("corporate_numbers.zip")
     file = next(glob.iglob("00_zenkoku_all_*.csv"))
     clean(file, os.path.join(destination, "corporate_numbers.csv"))
-    copy_schema_file(destination)
 
 
 if __name__ == "__main__":

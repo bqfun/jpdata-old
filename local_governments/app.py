@@ -140,16 +140,6 @@ def extract_csv_from_unions_excel(xlsx_file: str, destination: str):
         )
 
 
-def copy_schema_file(destination: str, file: str):
-    shutil.copyfile(
-        os.path.join(
-            os.path.dirname(__file__),
-            file,
-        ),
-        os.path.join(destination, file),
-    )
-
-
 def main():
     destination = os.environ["DESTINATION"]
     cities_file_url = fetch_latest_cities_file_url()
@@ -170,9 +160,6 @@ def main():
         extract_csv_from_unions_excel(
             os.path.join(tmpdirname, "union_codes.xlsx"), destination
         )
-    copy_schema_file(destination, "designated_cities_schema.json")
-    copy_schema_file(destination, "local_governments_schema.json")
-    copy_schema_file(destination, "unions_schema.json")
 
 
 if __name__ == "__main__":
