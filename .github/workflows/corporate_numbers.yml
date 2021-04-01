@@ -30,6 +30,7 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - run: pip install -U httplib2==0.15.0
       - run: bq load --source_format=CSV --skip_leading_rows=1 corporate_numbers.corporate_numbers outputs/corporate_numbers.csv corporate_numbers/corporate_numbers_schema.json
       - name: Instal IBM Cloud CLI
         run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
