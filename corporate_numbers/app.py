@@ -231,6 +231,7 @@ def copy_schema_file(destination: str):
 
 def main():
     destination = os.environ["DESTINATION"]
+    os.makedirs(destination, exist_ok=True)
     download("corporate_numbers.zip")
     unzip("corporate_numbers.zip")
     file = next(glob.iglob("00_zenkoku_all_*.csv"))
