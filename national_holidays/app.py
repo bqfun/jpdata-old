@@ -2,7 +2,6 @@ import csv
 import datetime
 import io
 import os
-import shutil
 import urllib.request
 
 
@@ -29,20 +28,10 @@ def fetch_national_holidays(destination: str) -> None:
         )
 
 
-def copy_schema_file(destination: str):
-    shutil.copyfile(
-        os.path.join(
-            os.path.dirname(__file__), "national_holidays_schema.json"
-        ),
-        os.path.join(destination, "national_holidays_schema.json"),
-    )
-
-
 def main():
     destination = os.environ["DESTINATION"]
     os.makedirs(destination, exist_ok=True)
     fetch_national_holidays(destination)
-    copy_schema_file(destination)
 
 
 if __name__ == "__main__":

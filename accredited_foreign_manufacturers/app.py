@@ -89,16 +89,6 @@ def extract_csv(xlsx_file: str, file: str):
         )
 
 
-def copy_schema_file(destination: str):
-    shutil.copyfile(
-        os.path.join(
-            os.path.dirname(__file__),
-            "accredited_foreign_manufacturers_schema.json",
-        ),
-        destination,
-    )
-
-
 def main():
     destination = os.environ["DESTINATION"]
     url = fetch_latest_file_url()
@@ -116,11 +106,6 @@ def main():
             xlsx_file,
             os.path.join(destination, "accredited_foreign_manufacturers.csv"),
         )
-    copy_schema_file(
-        os.path.join(
-            destination, "accredited_foreign_manufacturers_schema.json"
-        )
-    )
 
 
 if __name__ == "__main__":
