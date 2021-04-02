@@ -11,7 +11,7 @@ import pyarrow as pa
 import pyarrow.csv as pc
 import pyarrow.parquet as pq
 
-column_types = pa.Schema(
+column_types = pa.schema(
     (
         ("sequence_number", pa.int64()),
         ("corporate_number", pa.string()),
