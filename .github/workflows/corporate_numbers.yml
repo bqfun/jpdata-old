@@ -27,8 +27,9 @@ jobs:
       - uses: ./corporate_numbers
         with:
           destination: /home/runner/work/jpdata/jpdata/outputs
-      - uses: google-github-actions/setup-gcloud@v0.2.0
+      - uses: google-github-actions/setup-gcloud@master
         with:
+          version: '289.0.0'
           service_account_key: ${{ secrets.GCP_SA_KEY }}
       - run: bq load --source_format=PARQUET corporate_numbers.corporate_numbers outputs/corporate_numbers.parquet corporate_numbers/corporate_numbers_schema.json
       - name: Instal IBM Cloud CLI
