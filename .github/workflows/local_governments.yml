@@ -30,9 +30,9 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - run: bq load --source_format=CSV --skip_leading_rows=1 local_governments.designated_cities outputs/designated_cities.csv local_governments/designated_cities_schema.json
-      - run: bq load --source_format=CSV --skip_leading_rows=1 local_governments.local_governments outputs/local_governments.csv local_governments/local_governments_schema.json
-      - run: bq load --source_format=CSV --allow_quoted_newlines --skip_leading_rows=1 local_governments.unions outputs/unions.csv local_governments/unions_schema.json
+      - run: bq load --replace --source_format=CSV --skip_leading_rows=1 local_governments.designated_cities outputs/designated_cities.csv local_governments/designated_cities_schema.json
+      - run: bq load --replace --source_format=CSV --skip_leading_rows=1 local_governments.local_governments outputs/local_governments.csv local_governments/local_governments_schema.json
+      - run: bq load --replace --source_format=CSV --allow_quoted_newlines --skip_leading_rows=1 local_governments.unions outputs/unions.csv local_governments/unions_schema.json
       - name: Instal IBM Cloud CLI
         run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
       - run: ibmcloud login --apikey "$IBM_CLOUD_API_KEY" -r ""
