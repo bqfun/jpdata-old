@@ -33,7 +33,7 @@ jobs:
           # BigQuery error in load operation: Could not connect with BigQuery server due to: RedirectMissingLocation('Redirected but the response is missing a Location: header.')
           version: '289.0.0'
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - run: bq load --source_format=CSV --skip_leading_rows=1 corporate_numbers.corporate_numbers outputs/corporate_numbers.csv corporate_numbers/corporate_numbers_schema.json
+      - run: bq load --replace --source_format=CSV --skip_leading_rows=1 corporate_numbers.corporate_numbers outputs/corporate_numbers.csv corporate_numbers/corporate_numbers_schema.json
       - name: Instal IBM Cloud CLI
         run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
       - run: ibmcloud login --apikey "$IBM_CLOUD_API_KEY" -r ""
