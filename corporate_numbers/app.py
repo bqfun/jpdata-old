@@ -7,45 +7,6 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-import pyarrow as pa
-import pyarrow.csv as pc
-import pyarrow.parquet as pq
-
-column_types = pa.schema(
-    (
-        ("sequence_number", pa.int64()),
-        ("corporate_number", pa.string()),
-        ("process", pa.string()),
-        ("correct", pa.string()),
-        ("update_date", pa.date32()),
-        ("change_date", pa.date32()),
-        ("name", pa.string()),
-        ("name_image_id", pa.string()),
-        ("kind", pa.string()),
-        ("prefecture_name", pa.string()),
-        ("city_name", pa.string()),
-        ("street_number", pa.string()),
-        ("address_image_id", pa.string()),
-        ("prefecture_code", pa.string()),
-        ("city_code", pa.string()),
-        ("post_code", pa.string()),
-        ("address_outside", pa.string()),
-        ("address_outside_image_id", pa.string()),
-        ("close_date", pa.date32()),
-        ("close_cause", pa.string()),
-        ("successor_corporate_number", pa.string()),
-        ("change_cause", pa.string()),
-        ("assignment_date", pa.date32()),
-        ("latest", pa.string()),
-        ("en_name", pa.string()),
-        ("en_prefecture_name", pa.string()),
-        ("en_city_name", pa.string()),
-        ("en_address_outside", pa.string()),
-        ("furigana", pa.string()),
-        ("hihyoji", pa.string()),
-    )
-)
-
 
 def download(file: str) -> None:
     user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:62.0) Gecko/20100101 Firefox/62.0"
@@ -158,7 +119,40 @@ def clean(source: str, destination: str):
         reader = csv.reader(s)
         writer = csv.writer(d)
 
-        writer.writerow(field.name for field in column_types)
+        writer.writerow(
+            (
+                "sequence_number",
+                "corporate_number",
+                "process",
+                "correct",
+                "update_date",
+                "change_date",
+                "name",
+                "name_image_id",
+                "kind",
+                "prefecture_name",
+                "city_name",
+                "street_number",
+                "address_image_id",
+                "prefecture_code",
+                "city_code",
+                "post_code",
+                "address_outside",
+                "address_outside_image_id",
+                "close_date",
+                "close_cause",
+                "successor_corporate_number",
+                "change_cause",
+                "assignment_date",
+                "latest",
+                "en_name",
+                "en_prefecture_name",
+                "en_city_name",
+                "en_address_outside",
+                "furigana",
+                "hihyoji",
+            )
+        )
         writer.writerows(
             (
                 # sequence_number
@@ -226,12 +220,6 @@ def clean(source: str, destination: str):
         )
 
 
-def to_parquet(source: str, destination: str):
-    convert_options = pc.ConvertOptions(column_types=column_types)
-    table = pc.read_csv(source, convert_options=convert_options)
-    pq.write_table(table, destination)
-
-
 def main():
     destination = os.environ["DESTINATION"]
     os.makedirs(destination, exist_ok=True)
@@ -239,10 +227,6 @@ def main():
     unzip("corporate_numbers.zip")
     file = next(glob.iglob("00_zenkoku_all_*.csv"))
     clean(file, os.path.join(destination, "corporate_numbers.csv"))
-    to_parquet(
-        os.path.join(destination, "corporate_numbers.csv"),
-        os.path.join(destination, "corporate_numbers.parquet"),
-    )
 
 
 if __name__ == "__main__":
