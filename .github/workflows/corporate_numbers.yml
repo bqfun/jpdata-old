@@ -29,6 +29,8 @@ jobs:
           destination: /home/runner/work/jpdata/jpdata/outputs
       - uses: google-github-actions/setup-gcloud@master
         with:
+          # versionを指定しないと2021-04-03現在、以下のエラーが発生するため、動作確認ができているバージョンを使う。
+          # BigQuery error in load operation: Could not connect with BigQuery server due to: RedirectMissingLocation('Redirected but the response is missing a Location: header.')
           version: '289.0.0'
           service_account_key: ${{ secrets.GCP_SA_KEY }}
       - run: bq load --source_format=CSV --skip_leading_rows=1 corporate_numbers.corporate_numbers outputs/corporate_numbers.csv corporate_numbers/corporate_numbers_schema.json
