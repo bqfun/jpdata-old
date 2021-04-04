@@ -97,12 +97,12 @@ def _kind(kind: str) -> str:
     raise ValueError
 
 
-def _latest(latest: str) -> str:
-    if latest == "0":
-        return "過去情報"
-    if latest == "1":
-        return "最新情報"
-    raise ValueError
+# def _latest(latest: str) -> str:
+#     if latest == "0":
+#         return "過去情報"
+#     if latest == "1":
+#         return "最新情報"
+#     raise ValueError
 
 
 def _hihyoji(hihyoji: str) -> str:
@@ -144,7 +144,7 @@ def clean(source: str, destination: str):
                 "successor_corporate_number",
                 "change_cause",
                 "assignment_date",
-                "latest",
+                # "latest",  # 必ず1が入るので除外
                 "en_name",
                 "en_prefecture_name",
                 "en_city_name",
@@ -202,7 +202,7 @@ def clean(source: str, destination: str):
                 # assignment_date
                 row[22],
                 # latest
-                _latest(row[23]),
+                # _latest(row[23]),  # 必ず1が入るので除外
                 # en_name
                 row[24],
                 # en_prefecture_name

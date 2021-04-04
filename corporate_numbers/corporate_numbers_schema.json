@@ -2,151 +2,175 @@
   {
     "description": "一連番号",
     "name": "sequence_number",
-    "type": "INT64"
+    "type": "INT64",
+    "mode": "REQUIRED"
   },
   {
     "description": "法人番号",
     "name": "corporate_number",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "REQUIRED"
   },
   {
     "description": "処理区分",
     "name": "process",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "REQUIRED"
   },
   {
     "description": "訂正区分",
     "name": "correct",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "REQUIRED"
   },
   {
     "description": "更新年月日",
     "name": "update_date",
-    "type": "DATE"
+    "type": "DATE",
+    "mode": "REQUIRED"
   },
   {
     "description": "変更年月日",
     "name": "change_date",
-    "type": "DATE"
+    "type": "DATE",
+    "mode": "REQUIRED"
   },
   {
     "description": "商号又は名称",
     "name": "name",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "REQUIRED"
   },
   {
     "description": "商号又は名称イメージID",
     "name": "name_image_id",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "法人種別",
     "name": "kind",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "REQUIRED"
   },
   {
     "description": "国内所在地（都道府県）",
     "name": "prefecture_name",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国内所在地（市区町村）",
     "name": "city_name",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国内所在地（丁目番地等）",
     "name": "street_number",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国内所在地イメージID",
     "name": "address_image_id",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "都道府県コード",
     "name": "prefecture_code",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "市区町村コード",
     "name": "city_code",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "郵便番号",
     "name": "post_code",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国外所在地",
     "name": "address_outside",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国外所在地イメージID",
     "name": "address_outside_image_id",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "登記記録の閉鎖等年月日",
     "name": "close_date",
-    "type": "DATE"
+    "type": "DATE",
+    "mode": "NULLABLE"
   },
   {
     "description": "登記記録の閉鎖等の事由",
     "name": "close_cause",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "承継先法人番号",
     "name": "successor_corporate_number",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "変更事由の詳細",
     "name": "change_cause",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "法人番号指定年月日",
     "name": "assignment_date",
-    "type": "DATE"
-  },
-  {
-    "description": "最新履歴",
-    "name": "latest",
-    "type": "STRING"
+    "type": "DATE",
+    "mode": "REQUIRED"
   },
   {
     "description": "商号又は名称（英語表記）",
     "name": "en_name",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国内所在地（都道府県）（英語表記）",
     "name": "en_prefecture_name",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国内所在地（市町村丁目番地等）（英語表記）",
     "name": "en_city_name",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "国外所在地（英語表記）",
     "name": "en_address_outside",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "フリガナ",
     "name": "furigana",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "NULLABLE"
   },
   {
     "description": "検索対象除外",
     "name": "hihyoji",
-    "type": "STRING"
+    "type": "STRING",
+    "mode": "REQUIRED"
   }
 ]
