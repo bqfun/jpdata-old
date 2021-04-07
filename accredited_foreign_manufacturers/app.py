@@ -100,7 +100,7 @@ def main():
         )
         unzip(os.path.join(tmpdirname, "accredited_foreign_manufacturers.zip"))
         xlsx_file = find_file(
-            os.path.join(tmpdirname, "外国製造業者認定・登録リスト_*.xlsx")
+            os.path.join(tmpdirname, "**", "外国製造業者認定・登録リスト_*.xlsx")
         )
         extract_csv(
             xlsx_file,
