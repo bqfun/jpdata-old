@@ -1,0 +1,11 @@
+name: 'Number of births'
+description: '出生数：厚生労働省『人口動態調査』'
+inputs:
+  destination:
+    description: 'データ出力先ディレクトリ'
+    required: true
+runs:
+  using: 'docker'
+  image: 'ghcr.io/bqfun/number_of_births:latest'
+  env:
+    DESTINATION: ${{ inputs.destination }}
