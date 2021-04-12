@@ -1,0 +1,39 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'accessible_buildings/**'
+      - '.github/workflows/accessible_buildings.yml'
+  schedule:
+      - cron: '0 0 * * 0'
+
+jobs:
+  push_and_load:
+    runs-on: ubuntu-latest
+    if: github.repository == 'bqfun/jpdata'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./accessible_buildings
+          push: true
+          tags: ghcr.io/bqfun/accessible_buildings
+      - uses: ./accessible_buildings
+        with:
+          destination: /home/runner/work/jpdata/jpdata/outputs
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - run: bq load --replace --source_format=CSV --skip_leading_rows=1 accessible_buildings.accessible_buildings outputs/accessible_buildings.csv accessible_buildings/accessible_buildings_schema.json
+      - name: Instal IBM Cloud CLI
+        run: curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
+      - run: ibmcloud login --apikey "$IBM_CLOUD_API_KEY" -r ""
+        env:
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+      - run: ibmcloud cos put-object --bucket jpdata --region ap-geo --key accessible_buildings/accessible_buildings.csv --body outputs/accessible_buildings.csv

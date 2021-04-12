@@ -1,0 +1,80 @@
+[
+  {
+    "description": "建築物のある都道府県名",
+    "name": "prefecture",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "建築物の住所",
+    "name": "address",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "建築物の名前",
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "建築物の用途",
+    "name": "use",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "建築物の階数（地上部分）",
+    "name": "number_of_floors__above_ground",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "建築物の階数（地下部分）",
+    "name": "number_of_floors__underground",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "昇降機の数",
+    "name": "number_of_elevators",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "延べ面積（㎡）",
+    "name": "gross_floor_area",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "認定年月日",
+    "name": "date_nintei__year",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "description": "認定年月日",
+    "name": "date_nintei__month",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "認定年月日",
+    "name": "date_nintei__day",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "緯度（世界測地系）",
+    "name": "latitude",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "description": "経度（世界測地系）",
+    "name": "longitude",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]
