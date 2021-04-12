@@ -43,6 +43,8 @@ public class Main {
                 row ->
                     IntStream.range(0, years.length)
                         .mapToObj(i -> new String[] {row[0], row[1], years[i], row[2 + i]}))
+            .filter(row -> !"".equals(row[3]))
+            .filter(row -> !"－".equals(row[3]))
             .toArray(String[][]::new);
 
     try (final FileWriter writer = new FileWriter(new File(destination, "number_of_births.csv"))) {
