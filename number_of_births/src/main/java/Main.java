@@ -44,6 +44,7 @@ public class Main {
                     IntStream.range(0, years.length)
                         .mapToObj(i -> new String[] {row[0], row[1], years[i], row[2 + i]}))
             .filter(row -> !"".equals(row[3]))
+            .filter(row -> !"-".equals(row[3]))
             .filter(row -> !"－".equals(row[3]))
             .toArray(String[][]::new);
 
