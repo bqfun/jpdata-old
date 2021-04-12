@@ -224,7 +224,13 @@ def main():
     destination = os.environ["DESTINATION"]
     os.makedirs(destination, exist_ok=True)
     download("corporate_numbers.zip")
-    unzip("corporate_numbers.zip")
+    for i in reversed(range(3)):
+        try:
+            unzip("corporate_numbers.zip")
+        except zipfile.BadZipFile as e:
+            if i == 0:
+                raise e
+            download("corporate_numbers.zip")
     file = next(glob.iglob("00_zenkoku_all_*.csv"))
     clean(file, os.path.join(destination, "corporate_numbers.csv"))
 
