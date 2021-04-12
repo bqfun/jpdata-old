@@ -48,19 +48,19 @@
     "mode": "NULLABLE"
   },
   {
-    "description": "認定年月日",
+    "description": "認定年月日_年",
     "name": "date_nintei__year",
     "type": "STRING",
     "mode": "REQUIRED"
   },
   {
-    "description": "認定年月日",
+    "description": "認定年月日_月",
     "name": "date_nintei__month",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
-    "description": "認定年月日",
+    "description": "認定年月日_日",
     "name": "date_nintei__day",
     "type": "STRING",
     "mode": "NULLABLE"
