@@ -74,7 +74,6 @@ func main() {
 	}
 }
 
-// optional intみたいな振る舞いできない？
 func parseDate(value string) (string, string, string, error) {
 	if value == "-" {
 		return "", "", "", nil
@@ -82,8 +81,6 @@ func parseDate(value string) (string, string, string, error) {
 	if value == "20130700" {
 		return "2013", "7", "", nil
 	}
-	// パターンを外部から受け取るならCompileで、内部で定義してるから
-	// MustCompileでエラーハンドリング省略してもいい？
 	re := regexp.MustCompile(`(199[4-9]|200[0-9]|201[0-2])0000`)
 	m := re.FindStringSubmatch(value)
 	if len(m) == 2 {
