@@ -25,6 +25,7 @@ jobs:
       - run: |
           mvn compile com.google.cloud.tools:jib-maven-plugin:2.8.0:build \
                   -Dimage=ghcr.io/bqfun/number_of_births
+        working-directory: number_of_births
       - uses: ./number_of_births
         with:
           destination: /home/runner/work/jpdata/jpdata/outputs
