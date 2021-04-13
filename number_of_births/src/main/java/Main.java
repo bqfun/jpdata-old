@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -36,6 +37,7 @@ public class Main {
     // 北海道 札幌市,11002,1970,20265
     // 北海道 札幌市,11002,1975,23404
     // 北海道 札幌市,11002,1975,22251
+    final Set<String> emptyValue = Set.of("", "－", "−", "-");
     final String[][] csv =
         Arrays.stream(numberOfBirths)
             .skip(2)
@@ -43,9 +45,7 @@ public class Main {
                 row ->
                     IntStream.range(0, years.length)
                         .mapToObj(i -> new String[] {row[0], row[1], years[i], row[2 + i]}))
-            .filter(row -> !"".equals(row[3]))
-            .filter(row -> !"−".equals(row[3]))
-            .filter(row -> !"－".equals(row[3]))
+            .filter(row -> !emptyValue.contains(row[3]))
             .toArray(String[][]::new);
 
     try (final FileWriter writer = new FileWriter(new File(destination, "number_of_births.csv"))) {
