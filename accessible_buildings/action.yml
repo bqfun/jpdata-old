@@ -1,0 +1,11 @@
+name: 'Buildings Accessible to and Usable by the Elderly and Physically Disabled Persons'
+description: '施設データ 認定特定建築物'
+inputs:
+  destination:
+    description: 'データ出力先ディレクトリ'
+    required: true
+runs:
+  using: 'docker'
+  image: 'ghcr.io/bqfun/accessible_buildings:latest'
+  env:
+    DESTINATION: ${{ inputs.destination }}
