@@ -39,7 +39,7 @@ def unzip(file: str):
 
 
 def find_file(file):
-    return glob.glob(file)[0]
+    return next(glob.iglob(file, recursive=True), None)
 
 
 def extract_csv(xlsx_file: str, file: str):
