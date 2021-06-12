@@ -19,10 +19,15 @@ def download(file: str) -> None:
         body = response.read()
 
     token = re.search(b'value="([a-z0-9-]{36})"', body).group(1).decode()
+    file_no = int(
+        re.search(br"Unicode(?:.|\n)*return doDownload\((\d{5})\)", body)
+        .group(1)
+        .decode()
+    )
 
     data = {
         "jp.go.nta.houjin_bangou.framework.web.common.CNSFWTokenProcessor.request.token": token,
-        "selDlFileNo": 13373,
+        "selDlFileNo": file_no,
         "event": "download",
     }
     headers = {"User-Agent": user_agent}
