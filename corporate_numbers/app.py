@@ -20,7 +20,7 @@ def download(file: str) -> None:
 
     token = re.search(b'value="([a-z0-9-]{36})"', body).group(1).decode()
     file_no = int(
-        re.search(br"Unicode(?:.|\n)*?return doDownload\((\d{5})\)", body)
+        re.search(br"Unicode</h2>(?:.|\n)*?return doDownload\((\d{5})\)", body)
         .group(1)
         .decode()
     )
