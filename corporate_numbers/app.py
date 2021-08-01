@@ -3,26 +3,20 @@ import glob
 import os
 import re
 import shutil
-import urllib.parse
-import urllib.request
 import zipfile
+
+import requests
 
 
 def download(file: str) -> None:
-    user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:62.0) Gecko/20100101 Firefox/62.0"
+    url = "https://www.houjin-bangou.nta.go.jp/download/zenken/index.html"
+    r = requests.get(url)
 
-    url = "https://www.houjin-bangou.nta.go.jp/download/zenken/"
-    headers = {"User-Agent": user_agent}
-
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req) as response:
-        body = response.read()
-
-    token = re.search(b'value="([a-z0-9-]{36})"', body).group(1).decode()
+    token = re.search(r'value="([a-z0-9-]{36})"', r.text).group(1)
     file_no = int(
-        re.search(br"Unicode</h2>(?:.|\n)*?return doDownload\((\d{5})\)", body)
-        .group(1)
-        .decode()
+        re.search(
+            r"Unicode</h2>(?:.|\n)*?return doDownload\((\d{5})\)", r.text
+        ).group(1)
     )
 
     data = {
@@ -30,16 +24,13 @@ def download(file: str) -> None:
         "selDlFileNo": file_no,
         "event": "download",
     }
-    headers = {"User-Agent": user_agent}
 
-    req = urllib.request.Request(
-        "https://www.houjin-bangou.nta.go.jp/download/zenken/index.html",
-        urllib.parse.urlencode(data).encode("ascii"),
-        headers=headers,
-    )
-
-    with urllib.request.urlopen(req) as res, open(file, "wb") as f:
-        shutil.copyfileobj(res, f)
+    with requests.get(
+        url,
+        params=data,
+        stream=True,
+    ) as r, open(file, "wb") as f:
+        shutil.copyfileobj(r.raw, f)
 
 
 def unzip(file):
